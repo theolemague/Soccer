@@ -17,20 +17,21 @@ LDLIBS = -lstdc++ -lm -lsfml-window -lsfml-graphics -lsfml-network -lsfml-system
 all: build $(APPDIR)/$(OUT)
 
 $(OBJDIR)/%.o: %.cpp
-	@mkdir -p $(@D)
+	mkdir -p $(@D)
 	$(CXX) $(CFLAGS) $(INCLUDE) -c $< -MMD -o $@
 
 $(APPDIR)/$(OUT): $(OBJFILES)
-	@mkdir -p $(@D)
+	mkdir -p $(@D)
 	$(CXX) $(CFLAGS) $^ -o $(APPDIR)/$(OUT) $(LDLIBS) 
 
 build:
-	@mkdir -p $(APPDIR)
-	@mkdir -p $(OBJDIR)
+	mkdir -p $(BUILDDIR)
+	mkdir -p $(APPDIR)
+	mkdir -p $(OBJDIR)
 
 .PHONY: clean
 clean:
-	rm -f $(OBJFILES) $(APPDIR)/$(OUT)
+	rm -rf $(BUILDDIR)
 
 .PHONY: run
 run:
